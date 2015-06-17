@@ -1,11 +1,28 @@
+
+# _*_ coding: utf-8 _*_
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 
+from django.views.decorators.csrf import csrf_protect
+
+from django.contrib.auth import authenticate, login
+
 from .models import Choice, Question
 
+def main_page(request):
+    output = '''
+      <html>
+        <head><title>%s</title></head>
+        <body>
+          <h3>%s</h3>
+          <p>%s</p>
+        </body>
+      </html>
+    ''' % ('Sterowanie','Witamy w pilocie','Tu możesz sterowac swoim robotem')
+    return HttpResponse(output)
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -38,10 +55,7 @@ def vote(request, question_id):
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
-            'question': p,
-            'error_message': "You didn't select a choice.",
-        })
+        return render(request, 'polls/detail.html', {'question': p,'error_message': "You didn't select a choice.",   })
     else:
         selected_choice.votes += 1
         selected_choice.save()
@@ -49,3 +63,10 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+
+
+
+
+#def logout(request):
+ #   auth.logout(request)
+ #   return HttpResponseRedirect("/account/loggedout/")

@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 class Question(models.Model):
     count=0
@@ -20,7 +20,7 @@ class Question(models.Model):
 
     def poszla(self):
         self.count+=1
-        return 'ola'+self.count
+        return 'ola'
 
 class Choice(models.Model):
     question = models.ForeignKey(Question)
@@ -28,3 +28,4 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __unicode__(self):              # __unicode__ on Python 2
             return self.choice_text
+
