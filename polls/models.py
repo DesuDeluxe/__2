@@ -21,6 +21,7 @@ class Question(models.Model):
     def poszla(self):
         self.count+=1
         return 'ola'
+<<<<<<< HEAD
 
 class Choice(models.Model):
     question = models.ForeignKey(Question)
@@ -29,3 +30,5 @@ class Choice(models.Model):
     def __unicode__(self):              # __unicode__ on Python 2
             return self.choice_text
 
+=======
+>>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625

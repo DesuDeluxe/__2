@@ -6,11 +6,15 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 
+<<<<<<< HEAD
 from django.views.decorators.csrf import csrf_protect
 
 from django.contrib.auth import authenticate, login
 
 from .models import Choice, Question
+=======
+from .models import Question
+>>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625
 
 def main_page(request):
     output = '''
@@ -47,8 +51,12 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+def go(request, question_id):
+    p = get_object_or_404(Question, pk=question_id)
 
+    return render(request, 'polls/detail.html', {'question': p, 'error_message': Question.objects.get(poszla()),   })
 
+<<<<<<< HEAD
 def vote(request, question_id):
     p = get_object_or_404(Question, pk=question_id)
     try:
@@ -70,3 +78,6 @@ def vote(request, question_id):
 #def logout(request):
  #   auth.logout(request)
  #   return HttpResponseRedirect("/account/loggedout/")
+=======
+#        return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+>>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625
