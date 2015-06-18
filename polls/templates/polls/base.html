@@ -5,7 +5,7 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "polls/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}{% endblock %}
-<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "polls/css/ie.css" %}{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "polls/css/rtl.css" %}{% endblock %}" />{% endif %}
 <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "polls/" %}{% endfilter %}";</script>
 <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
@@ -26,7 +26,7 @@
         {% block branding %}{% endblock %}
         </div>
         {% block usertools %}
-        {% if has_permission %}
+
         <div id="user-tools">
             {% block welcome-msg %}
                 {% trans 'Welcome,' %}
@@ -43,12 +43,11 @@
                     {% endif %}
                 {% endif %}
                 {% if user.has_usable_password %}
-                <a href="{% url 'polls:password_change' %}">{% trans 'Change password' %}</a> /
+                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
                 {% endif %}
-                <a href="{% url 'polls:logout_page' %}">{% trans 'Log out' %}</a>
+                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
             {% endblock %}
         </div>
-        {% endif %}
         {% endblock %}
         {% block nav-global %}{% endblock %}
     </div>

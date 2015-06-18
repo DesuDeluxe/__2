@@ -22,4 +22,5 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 
+
 admin.site.register(Question, QuestionAdmin)

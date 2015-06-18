@@ -1,10 +1,17 @@
 import datetime
-
+import os
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from subprocess import check_output
 
-
+class Routes:
+    def __init__(self,text):
+        self.text=text
+    def go(self):
+        process = check_output(['python2','/home/desu/oop/proj/tutorial/polls/bluetoo/te.py', self.text])
+        a=str(process)
+        return a
 
 class Question(models.Model):
     count=0
@@ -32,4 +39,7 @@ class Choice(models.Model):
     def __unicode__(self):              # __unicode__ on Python 2
             return self.choice_text
     def go(self):
-        return "X-D"
+        route=Routes(self.choice_text)
+        a=route.go()
+        return a
+

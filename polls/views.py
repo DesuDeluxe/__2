@@ -55,8 +55,9 @@ def run(request, question_id):
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {'question': p,'error_message': "You didn't select a choice.",   })
+        return render(request, 'polls/detail.html', {'question': p,'error_message': "You didn't select a route.",   })
     else:
+        selected_choice.go()
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
@@ -64,9 +65,7 @@ def run(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return
+
 
 
 def login_page(request):
@@ -90,6 +89,7 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect("/")
+ #   return HttpResponseRedirect(reverse('polls:main_page'))
 
 def register_page(request):
     if request.method == 'POST':

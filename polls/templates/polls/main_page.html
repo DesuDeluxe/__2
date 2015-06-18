@@ -11,24 +11,18 @@
 {% block content %}
 <p>
 <div style="text-align:center;">
-<h2>Strona domowa pensjonatu "Pod kwiatami"</h2>
-<div><img src="media/bamberg.png" /></div>
+<h2>Strona domowa pilota</h2>
+<div> <a href="/polls/">lista tras</a> </div>
 <p>{{podpis}}</p></div>
 <center>
-<h2>tras</h2>
+<h2>trasy</h2>
 <table border="0px" width="70%">
   {% for choice in question.choice %}
   <tr style="text-align:center;">
     <td style="text-align:left;font-size:14pt;">
-       <p class="br">{{apartment.name}}
-       <p class="br">Sypialnie: {{apartment.bedrooms}}
-       <p class="br">Łóżka: {{apartment.beds}}
-       <p class="br">{% if apartment.kitchenette %} Posiada aneks kuchenny {% else %} Nie posiada aneksu {% endif %}
-       <p class="br"><a href="">Cennik</a>
        <p class="br"><a href="">Rezerwacja</a>
     </td>
-    <td width="50%">{% if apartment.pathToPicture %} <img src="media/{{apartment.pathToPicture}}" width="600px" />{% endif %}
-    </td>
+
   </tr>
   {% endfor %}
 </table>

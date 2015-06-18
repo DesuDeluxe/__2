@@ -2,8 +2,8 @@
 
 <ul>
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} run{{ choice.votes|pluralize }}--- {{choice.go}}++
-    {% for choice in question.choice_set.all %}  {{ choice.choice_text }}  {% endfor %}</li>
+    <li>{{ choice.choice_text }} {{ choice.votes }} run{{ choice.votes|pluralize }}----------- {{choice.go}}
+    </li>
 {% endfor %}
 </ul>
 
