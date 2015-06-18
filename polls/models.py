@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
+
 class Question(models.Model):
     count=0
     question_text = models.CharField(max_length=200)
@@ -18,10 +20,10 @@ class Question(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
 
-    def poszla(self):
+    def by(self):
         self.count+=1
-        return 'ola'
-<<<<<<< HEAD
+        return 'you'
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question)
@@ -29,6 +31,5 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __unicode__(self):              # __unicode__ on Python 2
             return self.choice_text
-
-=======
->>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625
+    def go(self):
+        return "X-D"

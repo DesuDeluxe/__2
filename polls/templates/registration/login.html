@@ -1,5 +1,5 @@
  
-{% extends "base.html"%}
+{% extends "registration/base.html"%}
 {% block title %} - logowanie{% endblock %}
 {% block content%}
 <center>
@@ -10,7 +10,7 @@ Logowanie jest wymagane, jeżeli chcesz rezerwować noclegi.
 <fieldset>
     <form method="post" action=".">{% csrf_token %}
     <div style="text-align:left";>{{ form.as_p }}</div>
-    <input type="hidden" name="next" value="/" />
+    <input type="hidden" name="next" value="/polls" />
     <input type="submit" value="Logowanie"/>    <input type="reset" value="Wartości domyślne"/>
   </form>
 </fieldset>

@@ -6,26 +6,19 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 
-<<<<<<< HEAD
-from django.views.decorators.csrf import csrf_protect
+from polls.forms import *
 
-from django.contrib.auth import authenticate, login
+from django.template.loader import get_template
+from django.template import RequestContext
+from django.contrib.auth import authenticate, login,logout
 
-from .models import Choice, Question
-=======
-from .models import Question
->>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625
+from .models import Choice, Question,User
+
 
 def main_page(request):
-    output = '''
-      <html>
-        <head><title>%s</title></head>
-        <body>
-          <h3>%s</h3>
-          <p>%s</p>
-        </body>
-      </html>
-    ''' % ('Sterowanie','Witamy w pilocie','Tu możesz sterowac swoim robotem')
+    template = get_template("polls/main_page.html")
+    variables=RequestContext(request)
+    output = template.render(variables)
     return HttpResponse(output)
 
 class IndexView(generic.ListView):
@@ -51,13 +44,12 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-def go(request, question_id):
-    p = get_object_or_404(Question, pk=question_id)
+#def go(request, question_id):
+#    p = get_object_or_404(Question, pk=question_id)
+#    return render(request, 'polls/detail.html', {'question': p, 'error_message': Question.objects.get(poszla()),   })
 
-    return render(request, 'polls/detail.html', {'question': p, 'error_message': Question.objects.get(poszla()),   })
 
-<<<<<<< HEAD
-def vote(request, question_id):
+def run(request, question_id):
     p = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
@@ -72,12 +64,62 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return
 
 
+def login_page(request):
+    if request.method == 'POST':
+        form = FormularzLogowania(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password'])
+            login(request,user)
+            template = get_template("polls/main_page.html")
+            variables = RequestContext(request,{'user':user})
+            output = template.render(variables)
+            return HttpResponseRedirect("/")
+    else:
+        form = FormularzLogowania()
+    template = get_template("registration/login.html")
+    variables = RequestContext(request,{'form':form})
+    output = template.render(variables)
+    return HttpResponse(output)
+
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect("/")
+
+def register_page(request):
+    if request.method == 'POST':
+        form = FormularzRejestracji(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+              username=form.cleaned_data['username'],
+              password=form.cleaned_data['password1'],
+              email=form.cleaned_data['email']
+            )
+            user.save()
+            if form.cleaned_data['log_on']:
+                user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password1'])
+                login(request,user)
+                template = get_template("polls/main_page.html")
+                variables = RequestContext(request,{'user':user})
+                output = template.render(variables)
+                return HttpResponseRedirect("/")
+            else:
+                template = get_template("registration/register_success.html")
+                variables = RequestContext(request,{'username':form.cleaned_data['username']})
+                output = template.render(variables)
+                return HttpResponse(output)
+    else:
+        form = FormularzRejestracji()
+    template = get_template("registration/register.html")
+    variables = RequestContext(request,{'form':form})
+    output = template.render(variables)
+    return HttpResponse(output)
 
 #def logout(request):
  #   auth.logout(request)
  #   return HttpResponseRedirect("/account/loggedout/")
-=======
-#        return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
->>>>>>> 7b928c5950e803c8cf6e00de015874e76a149625
