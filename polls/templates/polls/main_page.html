@@ -1,35 +1,16 @@
 {% extends "polls/base.html"%}
-{% block header %}
-  <div id="nav">
-    {% if user.is_authenticated %}
-      Zalogowany użytkownik: <b>{{user.name}}</b>    <a href="/logout/">wyloguj się</a>    
-    {% else %}
-      <a href="/login/">zaloguj się</a>    <a href="/register/">rejestracja</a>
-    {% endif %}
-  </div>
-{% endblock %}
+
 {% block content %}
 <p>
 <div style="text-align:center;">
 <h2>Strona domowa pilota</h2>
 <div> <a href="/polls/">lista tras</a> </div>
-<p>{{podpis}}</p></div>
-<center>
-<h2>trasy</h2>
-<table border="0px" width="70%">
-  {% for choice in question.choice %}
-  <tr style="text-align:center;">
-    <td style="text-align:left;font-size:14pt;">
-       <p class="br"><a href="">Rezerwacja</a>
-    </td>
-
-  </tr>
-  {% endfor %}
-</table>
+<div style="text-align:center;">
+<h3>gjkks</h3>
 </center>
 {% endblock %}
 {% block footer %}
 <div style="text-align:center;">
-<a href="Galery.html"><img class="middle" src="media/back.gif"/>Galeria</a>
+<img src="/static/polls/Segway-i2.jpg"/>
 </div>
 {% endblock %}

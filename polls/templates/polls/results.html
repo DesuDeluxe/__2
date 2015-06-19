@@ -1,10 +1,11 @@
-<h1>{{ question.question_text }}</h1>
-
+<h1>{{ route.route_text }}</h1>
 <ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} {{ choice.votes }} run{{ choice.votes|pluralize }}----------- {{choice.go}}
+{% for choice in route.choice_set.all %}
+{% ifequal selected choice.id %}}
+<li>{{ choice.choice_text }} {{ choice.votes }} run{{ choice.votes|pluralize }}----------- {{choice.go}}
     </li>
+{%endifequal%}
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Run again?</a> 
+<a href="{% url 'polls:detail' route.id %}">Run again?</a>

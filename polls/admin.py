@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 
-from .models import Choice,Question
+from .models import Choice,Route
 
 
 class ChoiceInline(admin.TabularInline):
@@ -10,17 +10,17 @@ class ChoiceInline(admin.TabularInline):
     extra = 1
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class RouteAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['question_text']}),
+        (None,               {'fields': ['route_text']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     list_filter = ['pub_date']
-    search_fields = ['question_text']
-    list_display = ('question_text', 'pub_date', 'was_published_recently','by')
+    search_fields = ['route_text']
+    list_display = ('route_text', 'pub_date', 'was_published_recently','by')
     inlines = [ChoiceInline]
 
 
 
 
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(Route, RouteAdmin)

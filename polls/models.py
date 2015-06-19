@@ -13,12 +13,12 @@ class Routes:
         a=str(process)
         return a
 
-class Question(models.Model):
+class Route(models.Model):
     count=0
-    question_text = models.CharField(max_length=200)
+    route_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     def __unicode__(self):              # __unicode__ on Python 2
-        return self.question_text
+        return self.route_text
 
     def was_published_recently(self):
         now = timezone.now()
@@ -33,13 +33,20 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question)
+    route = models.ForeignKey(Route)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+    selected=models.IntegerField(default=99999999)
     def __unicode__(self):              # __unicode__ on Python 2
             return self.choice_text
     def go(self):
-        route=Routes(self.choice_text)
-        a=route.go()
+        rout=Routes(self.choice_text)
+        a=rout.go()
         return a
+#    def res(self):
+  #      self.selected=99999999
+#        return self.selected
+    def re(self):
+        aa=5
+        return aa
 

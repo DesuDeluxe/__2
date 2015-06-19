@@ -2,10 +2,10 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
 
-{% if latest_question_list %}
+{% if latest_route_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for route in latest_route_list %}
+        <li><a href="{% url 'polls:detail' route.id %}">{{ route.route_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

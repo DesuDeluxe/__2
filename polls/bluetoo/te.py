@@ -7,3 +7,12 @@ if sys.argv[1]=='left':
 
 if sys.argv[1]=='right':
     print ("going right")
+
+if sys.argv[1]=='straight':
+    print ("going straight")
+
+if sys.argv[1]=='back':
+    print ("going back")
+
+if sys.argv[1]=='circle':
+    print ("going circle")
